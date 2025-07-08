@@ -14,7 +14,7 @@ class TranscriptionEngine:
         Initialize the transcription engine.
         
         Args:
-            model_name: Whisper model to use (tiny, base, small, medium, large)
+            model_name: Whisper model to use (tiny, base, small, medium, large, turbo)
             language: Language for transcription (english, auto, etc.)
         """
         self.model_name = model_name

@@ -75,7 +75,31 @@ uv run python main.py
 uv sync
 ```
 
+### CLI Options
+
+```bash
+# Show all available options
+uv run whisper-term --help
+
+# Interactive mode (default)
+uv run whisper-term
+
+# Direct recording mode
+uv run whisper-term --record
+
+# Specify model and language
+uv run whisper-term --model small --language spanish
+
+# Direct mode with custom settings
+uv run whisper-term -r -m turbo -l english
+
+# Show recent sessions
+uv run whisper-term --recent 5
+```
+
 ## Usage
+
+### Interactive Mode
 
 1. Launch the application:
 ```bash
@@ -87,6 +111,27 @@ uv run whisper-term
 4. Press **ENTER** again to stop recording
 5. Wait for transcription to complete
 6. Find your audio and text files in the `data/recordings/` folder
+
+### Direct CLI Mode
+
+For quick transcription with automatic clipboard copy:
+
+```bash
+# Quick recording with default settings
+uv run whisper-term --record
+
+# Specify model and language
+uv run whisper-term --record --model small --language spanish
+
+# Short flags for power users
+uv run whisper-term -r -m base -l english
+```
+
+**Direct mode features:**
+- Starts recording immediately
+- Automatically copies transcription to clipboard
+- Saves audio file immediately after recording stops
+- Perfect for quick voice notes and automation
 
 ## File Organization
 

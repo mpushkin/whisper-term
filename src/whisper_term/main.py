@@ -34,16 +34,29 @@ For more information, visit: https://github.com/user/whisper-term
     )
     
     parser.add_argument(
-        '--model',
+        '--model', '-m',
         default='base',
-        choices=['tiny', 'base', 'small', 'medium', 'large'],
+        choices=['tiny', 'base', 'small', 'medium', 'large', 'turbo'],
         help='Whisper model to use (default: base)'
     )
     
     parser.add_argument(
-        '--language',
+        '--language', '-l',
         default='english',
         help='Language for transcription (default: english)'
+    )
+    
+    parser.add_argument(
+        '--record', '-r',
+        action='store_true',
+        help='Start recording immediately (bypass interactive mode)'
+    )
+    
+    parser.add_argument(
+        '--clipboard', '-c',
+        action='store_true',
+        default=True,
+        help='Copy transcription to clipboard (default: True)'
     )
     
     parser.add_argument(
@@ -60,6 +73,24 @@ For more information, visit: https://github.com/user/whisper-term
     )
     
     args = parser.parse_args()
+    
+    # Handle --record option (direct mode)
+    if args.record:
+        from .direct_mode import DirectModeHandler
+        
+        try:
+            direct_handler = DirectModeHandler(
+                model_name=args.model,
+                language=args.language,
+                clipboard_enabled=args.clipboard
+            )
+            
+            success = direct_handler.run_direct_recording()
+            sys.exit(0 if success else 1)
+            
+        except Exception as e:
+            print(f"❌ Direct mode error: {e}")
+            sys.exit(1)
     
     # Handle --recent option
     if args.recent:
@@ -105,15 +136,12 @@ For more information, visit: https://github.com/user/whisper-term
     
     try:
         # Initialize and run the application
-        app = WhisperTermApp()
+        app = WhisperTermApp(
+            model_name=args.model,
+            language=args.language
+        )
         
-        # Override default settings if provided
-        if args.model != 'base':
-            app.transcription_engine.model_name = args.model
-        
-        if args.language != 'english':
-            app.transcription_engine.language = args.language
-        
+        # Override data directory if provided
         if args.data_dir != 'data':
             app.file_manager.base_data_dir = Path(args.data_dir)
             app.file_manager.recordings_dir = app.file_manager.base_data_dir / "recordings"

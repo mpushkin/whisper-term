@@ -15,11 +15,12 @@ Quick Start
 
 Folder Structure
 ----------------
-current/      – Snapshot of how the system works today (overview, architecture, usage, etc.)  
-vision/       – High-level direction of where the project is going.  
-ideas/        – Unvetted improvement proposals; a scratchpad for brainstorming.  
-iterations/   – Groomed, trackable improvement efforts (design → plan → reflection).  
-templates/    – Reusable skeleton files for new ideas and iterations.
+current/        – Snapshot of how the system works today (overview, architecture, usage, etc.)  
+vision/         – High-level direction of where the project is going.  
+ideas/          – Unvetted improvement proposals; a scratchpad for brainstorming.  
+investigations/ – Research and technical feasibility studies.  
+iterations/     – Groomed, trackable improvement efforts (design → plan → reflection).  
+templates/      – Reusable skeleton files for new ideas and iterations.
 
 Guiding Principles
 ------------------
